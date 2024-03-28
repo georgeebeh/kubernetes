@@ -6,6 +6,8 @@ metadata:
   namespace: default
 spec:
   podSelector: {}
+    matchLabels:
+      i-am: dumbledore
   ingress:
   - {}
   egress: 
