@@ -5,7 +5,7 @@ metadata:
   name: default-allow-all
   namespace: default
 spec:
-  podSelector: {}
+  podSelector: 
     matchLabels:
       i-am: dumbledore
   ingress:
