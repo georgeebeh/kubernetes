@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -11,14 +12,35 @@ spec:
     name: jekyll
     volumeMounts:
       - name: site
-        mounthPath: /site
+        mountPath: "/site"
     resources: {}
   initContainers:
   - image: kodekloud/jekyll 
     name: copy-jekyll-site
     command: ["jekyll", "new", "/site"]
+    volumeMounts:
+      - name: site
+        mountPath: "/site"
   dnsPolicy: ClusterFirst
   restartPolicy: Always
   volumes:
+    - name: site
+      persistentVolumeClaim:
+        claimName: jekyll-site
 
 status: {}
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jekyll-node-service
+  namespace: development
+spec:
+  selector:
+    run: jekyll
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 4000
