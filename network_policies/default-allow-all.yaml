@@ -1,0 +1,17 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-allow-all
+  namespace: default
+spec:
+  podSelector: 
+    matchLabels:
+      i-am: dumbledore
+  ingress:
+  - {}
+  egress: 
+  - {}
+  policyTypes:
+  - Ingress
+  - Egress
